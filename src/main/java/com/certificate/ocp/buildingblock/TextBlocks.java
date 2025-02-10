@@ -3,13 +3,16 @@ package com.certificate.ocp.buildingblock;
 public class TextBlocks {
 
     public static void main(String[] args) {
-        String html = """
+        String content ="Hello, World";
+        int javaVersion = 17;
+        String html = """ 
             <html>
                 <body>
-                    <p>Hello, World</p>
+                    <p>%s</p>
+                    <p>Java %d</p>
                 </body>
             </html>
             """;
-        System.out.println(html);
+        System.out.println(html.formatted(content, javaVersion));
     }
 }

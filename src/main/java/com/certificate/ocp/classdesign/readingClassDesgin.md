@@ -133,3 +133,61 @@ nhưng không thể áp dụng cho lớp (class) cấp cao nhất.
 ![img.png](img.png)
 
 - variables cannot be overriden, only hidden
+
+9. **Method this()**
+
+- Phương thức đặc biệt this() được sử dụng để gọi một constructor khác trong constructor, trong cùng một class.
+
+![img_1.png](img_1.png)
+
+***Rules for using this()***
+- this() chỉ có thể được gọi trong line đầu tiên trong constructor
+- this() chỉ có thể được gọi một lần
+- Bạn phải cẩn thận để không tạo ra một "chu kỳ" vô hạn của các constructor gọi nhau
+
+![img_2.png](img_2.png)
+
+![img_3.png](img_3.png)
+
+10. **Method super()**
+- Phương thức đặc biệt super() được sử dụng để gọi một constructor của một **superclass** trong một constructor của **subclass**
+- Nếu không có this() hoặc super() trong dòng đầu tiên, thì trình biên dịch sẽ tự động chèn super()
+
+![img_4.png](img_4.png)
+
+***Rules for using super()***
+- Nếu không có this() hoặc super() rõ ràng trong dòng đầu tiên của hàm khởi tạo, trình biên dịch sẽ chèn super() vào đầu mỗi hàm khởi tạo
+- Chỉ có thể gọi một lần
+- Phải được gọi trong dòng đầu tiên của constructor
+- Trường hợp: superclass có tạo constructor có đối số, thì hàm super() subclass extends phải có đối số giống superclass 
+
+11. **Initialize Object
+- Một đối tượng được khởi tạo thông qua constructor.
+- Nếu có một superclass, nó sẽ được khởi tạo trước
+- Tất cả các biến tĩnh được xử lý (theo thứ tự xuất hiện)
+- Tất cả các trình khởi tạo tĩnh được xử lý (theo thứ tự xuất hiện)
+
+- Static variables được khởi tạo theo thứ tự chúng xuất hiện. 
+- Static blocks được thực thi theo thứ tự xuất hiện từ trên xuống
+
+![img_5.png](img_5.png)
+
+- Instance variables được khởi tạo trước instance initializer blocks.
+- Instance blocks được thực thi trước constructor.
+
+![img_6.png](img_6.png)
+
+- Nếu lớp hiện tại kế thừa một lớp cha (superclass), thì constructor của lớp cha sẽ được gọi trước constructor của lớp con.
+
+![img_7.png](img_7.png)
+
+- 📌 Tóm tắt thứ tự khởi tạo
+- Khi tạo một thực thể (new Object()), JVM thực hiện theo thứ tự sau:
+
+- 1️⃣ Nạp lớp (class loading) (chỉ một lần)
+- 2️⃣ Khởi tạo biến static và thực thi static block (chỉ một lần). Thực thi supper class trước, sau đó thực thi subclass.
+- 2️⃣ Thực thi câu lệnh trong main() trước khi tạo object
+- 3️⃣ Cấp phát bộ nhớ cho object
+- 4️⃣ Khởi tạo biến instance và thực thi instance initializer blocks. Thực thi supper class trước, sau đó thực thi subclass.
+- 5️⃣ Gọi constructor của lớp cha (super())
+- 6️⃣ Thực thi constructor của lớp con
